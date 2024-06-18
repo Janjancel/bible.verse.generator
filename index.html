@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+          <meta charset="UTF-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1.0">
+          <title>Document</title>
+          <link rel="icon" href="https://github.com/Janjancel/icon/blob/main/T10.LOGO.png?raw=true" type="image/x-icon">
+          <style>
+                    body {
+                            background-image: url(https://github.com/Janjancel/icon/blob/main/treee.jpg?raw=true);
+                            background-position-x: center;
+                              padding-top: 30vh;
+                              justify-content: center;
+                              text-align: center;
+                              display: flex;
+                             
+                    }
+                    .container {
+                        /* background-color: aliceblue; */
+                              /* justify-content: center;
+                              text-align: center; */
+                              font-family: monospace;
+                              background-color: #15803d;
+                              padding: 20px;
+                              width: 200px;
+                              border-radius: 10px;
+                              border: solid 0.5px;
+                              color: khaki;
+
+ 
+
+                    }
+
+
+                    #display-quote {
+                              
+                              background-color: #052e16;
+                              color: rgb(210, 232, 112);
+                              font-size: large;
+                              /* border:solid 1px; */
+                              border-radius: 10px;
+                              padding: 5px;
+                              font-weight: 500;
+                              
+          
+                    }
+
+                    button {
+                              border-radius: 10px;
+                              height: 40px;
+                              font-weight: 500;
+                    }
+
+                    button:hover {
+                              background-color: #052e16;
+                              color: khaki;
+                    }
+        
+          </style>
+</head>
+<body>  
+          <div class="container">
+                    <h1>BIBLE VERSE GENERATOR</h1>
+                    <p id="display-quote"></p>
+                    <button onclick="generateQuote()">Generate Verse</button>
+          </div>
+
+          <script>
+                    const quotes = [
+                            "Juan 3:16 -'Sapagkat gayon na lamang ang pag-ibig ng Diyos sa sanlibutan, kaya't ibinigay niya ang kanyang kaisa-isang Anak, upang ang sinumang sumampalataya sa kanya ay hindi mapahamak kundi magkaroon ng buhay na walang hanggan.'",
+                            "Filipos 4:13 -'Lahat ng bagay ay aking magagawa sa pamamagitan ni Cristo na nagpapalakas sa akin.'",
+                            "Awit 23:1 -'Ang Panginoon ang aking pastol, hindi ako magkukulang.'",
+                            "Awit 118:24 -'Ito ang araw na ginawa ng Panginoon; tayo'y magalak at magdiwang.'",
+                            "Roma 8:28 -'Alam natin na sa lahat ng bagay ay gumagawa ang Diyos para sa ikabubuti ng mga nagmamahal sa kanya, na tinawag ayon sa kanyang layunin.'",
+                            "Jeremias 29:11 -'Sapagkat nalalaman ko ang mga plano ko para sa inyo, mga planong magdudulot sa inyo ng kinabukasan at pag-asa. Hindi ko kayo pipinsalain. Ako, ang Panginoon, ang nagsasabi nito.'",
+                            "Mateo 11:28 -'Lumapit kayo sa akin, kayong lahat na nahihirapan at nabibigatang lubha sa inyong pasanin, at kayo'y bibigyan ko ng kapahingahan.'",
+                            "Isaias 41:10 -'Huwag kang matakot sapagkat ako'y sumasaiyo; huwag kang mangamba sapagkat ako'y iyong Diyos. Palalakasin kita at tutulungan; iingatan at ililigtas kita.'",
+                            "Awit 46:1 -'Ang Diyos ang ating kanlungan at kalakasan, handang saklolo sa oras ng kaguluhan.'",
+                            "1 Juan 4:7 -'Mga minamahal, mag-ibigan tayo, sapagkat ang pag-ibig ay mula sa Diyos. Ang bawat umiibig ay anak ng Diyos at kumikilala sa Diyos.'",
+                            "1 Corinto 13:4-5 -'Ang pag-ibig ay matiyaga at magandang-loob, hindi maiinggitin, hindi mayabang ni mapagmataas, hindi magaspang ang pag-uugali, hindi makasarili, hindi magagalitin ni mapagtanim ng sama ng loob.'",
+                            "2 Corinto 5:17 -'Kaya't kung ang sinuman ay na kay Cristo, siya ay bagong nilalang; ang mga dating bagay ay lumipas na, masdan, ang lahat ay naging bago.'",
+                            "Efeso 2:8-9 -'Sapagkat sa biyaya kayo'y naligtas sa pamamagitan ng pananampalataya; at ito'y hindi sa inyong sarili, ito'y kaloob ng Diyos; hindi sa pamamagitan ng mga gawa, upang ang sinuman ay huwag magmapuri.'",
+                            "Roma 12:2 -'Huwag kayong makiayon sa takbo ng mundong ito. Sa halip, hayaan ninyong baguhin ng Diyos ang inyong pag-iisip upang maunawaan ninyo ang kanyang kalooban, kung ano ang mabuti, kalugud-lugod, at ganap.'",
+                            "Hebreo 11:1 -'Ang pananampalataya ay siyang katiyakan ng mga bagay na inaasahan, ang katunayan ng mga bagay na hindi nakikita.'",
+                            "Hebreo 13:5 -'Huwag kayong magmukhang pera, at masiyahan na kayo sa anumang nasa inyo. Sapagkat sinabi niya, 'Kailanman ay hindi kita iiwan ni pababayaan man.'",
+                            "Santiago 1:5 -'Kung ang sinuman sa inyo ay kulang sa karunungan, humingi siya sa Diyos na nagbibigay nang sagana at walang panunumbat, at siya'y bibigyan.'",
+                            "1 Pedro 5:7 -'Ilagak ninyo sa kanya ang lahat ng inyong kabalisahan sapagkat siya ang nagmamalasakit sa inyo.'",
+                            "Mateo 6:33 -'Ngunit higit sa lahat ay pagsikapan ninyo ang kanyang kaharian at ang kanyang katuwiran, at ang lahat ng mga bagay na ito ay pawang idaragdag sa inyo.'",
+                            "Filipos 4:6-7 -'Huwag kayong mabalisa tungkol sa anumang bagay. Sa halip ay ilapit ninyo sa Diyos ang lahat ng inyong kahilingan sa pamamagitan ng panalanging may pasasalamat. At ang kapayapaan ng Diyos na hindi kayang maunawaan ng tao ang siyang mag-iingat sa inyong puso at pag-iisip dahil sa inyong pakikipag-isa kay Cristo Jesus.'",
+                    // FIRST 20-----------------------------------------------------------------------------------------------------------------
+                            "Roma 5:8 -'Ngunit pinatunayan ng Diyos ang kanyang pag-ibig sa atin nang mamatay si Cristo para sa atin noong tayo'y makasalanan pa.'",
+                            "Juan 14:6 -'Sinabi sa kanya ni Jesus, 'Ako ang daan, ang katotohanan, at ang buhay. Walang sinuman ang makakapunta sa Ama kundi sa pamamagitan ko.'",
+                            "Awit 27:1 -'Ang Panginoon ang aking liwanag at aking kaligtasan; kanino ako matatakot? Ang Panginoon ang muog ng aking buhay; kanino ako masisindak?'",
+                            "Awit 55:22 -'Ilagak mo sa Panginoon ang iyong pasanin, at kanyang aalalayan ka; hindi niya kailanman papayagan na ang matuwid ay makilos.'",
+                            "2 Timoteo 1:7 -'Sapagkat hindi tayo binigyan ng Diyos ng espiritu ng kaduwagan, kundi ng kapangyarihan, pag-ibig, at pagpipigil sa sarili.'",
+                            "Isaias 40:31 -'Ngunit ang naghihintay sa Panginoon ay magkakaroon ng bagong lakas; sila'y paiilanglang na gaya ng mga agila; sila'y tatakbo at hindi mapapagod; sila'y lalakad at hindi manghihina.'",
+                            "Awit 91:1-2 -'Ang tumatahan sa lihim na dako ng Kataas-taasan ay mananatili sa lilim ng Makapangyarihan sa lahat. Aking sasabihin tungkol sa Panginoon, 'Siya'y aking kanlungan at aking muog, ang aking Diyos na siyang aking pinagtitiwalaan.'",
+                            "1 Juan 1:9 -'Kung ipinapahayag natin ang ating mga kasalanan, siya ay tapat at banal na magpapatawad sa atin at maglilinis sa atin mula sa lahat ng ating kalikuan.'",
+                            "Mateo 7:7-8 -'Humingi kayo at kayo'y bibigyan; humanap kayo at kayo'y makakatagpo; kumatok kayo at kayo'y pagbubuksan. Sapagkat ang bawat humihingi ay tumatanggap, ang humahanap ay nakakakita, at ang kumakatok ay pinagbubuksan.'",
+                            "Roma 10:9 -'Kung ipahahayag mo sa pamamagitan ng iyong bibig na si Jesus ay Panginoon, at manalig ka nang buong puso na siya'y muling binuhay ng Diyos, maliligtas ka.'",
+                            "Juan 10:10 -'Ang magnanakaw ay dumarating lamang upang magnakaw, pumatay, at magwasak. Ako'y naparito upang sila'y magkaroon ng buhay at magkaroon nito nang sagana.'",
+                            "Awit 121:1-2 -'Aking itinitingala ang aking mga mata sa mga bundok; saan kaya manggagaling ang aking tulong? Ang aking tulong ay nanggagaling sa Panginoon, na gumawa ng langit at lupa.'",
+                            "1 Tesalonica 5:16-18 -'Magalak kayong lagi, manalangin kayo nang walang patid, magpasalamat kayo sa lahat ng pagkakataon sapagkat ito ang kalooban ng Diyos para sa inyo kay Cristo Jesus.'",
+                            "Mateo 5:16 -'Gayundin naman, dapat ninyong paliwanagin ang inyong ilaw sa harap ng mga tao upang makita nila ang inyong mabubuting gawa at luwalhatiin nila ang inyong Amang nasa langit.'",
+                            "Awit 37:4 -'Magpakaligaya ka sa Panginoon, at ibibigay niya sa iyo ang mga nasa ng iyong puso.'",
+                            "Mateo 28:19-20 -'Kaya't humayo kayo at gawin ninyong alagad ang lahat ng mga bansa, bautismuhan ninyo sila sa pangalan ng Ama at ng Anak at ng Espiritu Santo, at turuan ninyo silang sumunod sa lahat ng bagay na iniutos ko sa inyo. At tandaan ninyo, ako'y laging kasama ninyo hanggang sa katapusan ng panahon.'",
+                            "Roma 6:23 -'Sapagkat ang kabayaran ng kasalanan ay kamatayan, ngunit ang kaloob ng Diyos ay buhay na walang hanggan kay Cristo Jesus na ating Panginoon.'",
+                            "1 Corinto 10:13 -'Walang pagsubok na dumating sa inyo na hindi nararanasan ng ibang tao. Ngunit tapat ang Diyos at hindi niya ipahihintulot na kayo'y subukin nang higit sa inyong makakaya. Sa halip, pagdating ng pagsubok, gagawa siya ng paraan upang kayo'y makayanan ito.'",
+                            "Santiago 1:2-3 -'Mga kapatid ko, magalak kayo kapag kayo'y dumaranas ng iba't ibang uri ng pagsubok. Alam ninyo na ang pagsubok sa inyong pananampalataya ay nagdudulot ng pagtitiis.'",
+                            "2 Corinto 12:9 -'Ngunit sinabi niya sa akin, 'Ang aking biyaya ay sapat na para sa iyo, sapagkat ang aking kapangyarihan ay nahahayag sa kahinaan.' Kaya't buong galak kong ipagmamalaki ang aking mga kahinaan upang manatili sa akin ang kapangyarihan ni Cristo.'",
+                    // SECOND 20-----------------------------------------------------------------------------------------------------------------
+                            "Hebreo 4:12 -'Sapagkat ang salita ng Diyos ay buhay at mabisa, mas matalas kaysa alinmang tabak na magkabila'y talim. Ito'y tumatagos maging sa pinaghihiwalayan ng kaluluwa at espiritu, ng mga kasukasuan at utak sa buto, at nakakatalos ng mga iniisip at binabalak ng puso.'",
+                            "Awit 34:18 -'Ang Panginoon ay malapit sa mga may pusong wasak, at inililigtas niya ang mga may espiritung durog.'",
+                            "1 Pedro 2:9 -'Ngunit kayo ay isang lahing pinili, isang maharlikang pagkasaserdote, isang bansang banal, isang bayang pag-aari ng Diyos, upang ipahayag ninyo ang mga kadakilaan niya na tumawag sa inyo mula sa kadiliman tungo sa kanyang kagila-gilalas na kaliwanagan.'",
+                            "Santiago 4:7 -'Kaya't pasakop kayo sa Diyos. Labanan ninyo ang diyablo, at siya'y lalayo sa inyo.'",
+                            "Filipos 4:8 -'Sa wakas, mga kapatid, anumang bagay na totoo, anumang bagay na kagalang-galang, anumang bagay na matuwid, anumang bagay na malinis, anumang bagay na kaibig-ibig, anumang bagay na kahanga-hanga, kung may anumang kagalingan at kung may anumang kapuri-puri, isipin ninyo ang mga bagay na ito.'",
+                            "1 Juan 4:18 -'Walang takot sa pag-ibig, kundi ang ganap na pag-ibig ay nagpapalayas ng takot. Sapagkat ang takot ay may kinalaman sa parusa. Ang natatakot ay hindi pa nagiging ganap sa pag-ibig.'",
+                            "Roma 15:13 -'Pagpalain nawa kayo ng Diyos ng pag-asa ng lubos na kagalakan at kapayapaan habang kayo'y nananalig sa kanya, upang sa kapangyarihan ng Espiritu Santo ay mapuno kayo ng pag-asa.'",
+                            "Awit 139:23-24 -'Siyasatin mo ako, O Diyos, at alamin ang aking puso; subukin mo ako at alamin ang aking mga iniisip. Tingnan mo kung may anumang likong landas sa akin, at patnubayan mo ako sa daang walang hanggan.'",
+                            "Isaias 26:3 -'Ang mga may matatag na pag-iisip ay iingatan mo sa lubos na kapayapaan, sapagkat sa iyo sila'y nagtitiwala.'",
+                            "Awit 119:105 -'Ang iyong salita ay ilawan sa aking mga paa at liwanag sa aking landas.'",
+                            "Kawikaan 3:5-6 -'Magtiwala ka sa Panginoon nang buong puso mo, at huwag kang manalig sa iyong sariling kaunawaan. Kilalanin mo siya sa lahat ng iyong mga lakad, at kanyang itutuwid ang iyong mga landas'",
+                            "Roma 8:1 -'Kaya nga, wala nang kahatulan sa mga na kay Cristo Jesus.'",
+                            "Juan 16:33 -'Sinabi ko ito sa inyo upang sa akin kayo'y magkaroon ng kapayapaan. Sa sanlibutan ay mayroon kayong kapighatian, ngunit laksan ninyo ang inyong loob; aking dinaig ang sanlibutan.'",
+                            "Isaias 40:8 -'Ang damo ay natutuyo, ang bulaklak ay nalalanta, ngunit ang salita ng ating Diyos ay mananatili magpakailanman.'",
+                            "Awit 27:14 -'Maghintay ka sa Panginoon; magpakatatag ka at magpalakas ng iyong loob; oo, maghintay ka sa Panginoon.'",
+                            "Kawikaan 3:7-8 -'Huwag kang magpakadunong sa iyong sariling mga mata; matakot ka sa Panginoon at humiwalay ka sa kasamaan. Ito'y magiging kagalingan sa iyong pusod at kasariwaan sa iyong mga buto.'",
+                            "Juan 15:5 -'Ako ang puno ng ubas, kayo ang mga sanga. Ang nananatili sa akin at ako sa kanya ay siyang namumunga ng marami, sapagkat kung hiwalay sa akin ay wala kayong magagawa.'",
+                            "Filipos 2:3-4 -'Huwag ninyong gawin ang anumang bagay dahil sa makasariling hangarin o pagyayabang. Sa halip, magpakumbaba kayo at ituring na higit na mabuti ang iba kaysa sa inyong sarili. Huwag lamang ninyo isipin ang inyong sariling kapakanan kundi ang kapakanan din ng iba'",
+                            "1 Timoteo 6:10 -'Sapagkat ang pag-ibig sa salapi ay ugat ng lahat ng uri ng kasamaan. Dahil sa paghahangad sa salapi, ang ilan ay naligaw sa pananampalataya at nasadlak sa maraming kapighatian'",
+                            "Isaias 55:8-9 -'Sapagkat ang aking mga pag-iisip ay hindi ninyo mga pag-iisip, ni ang inyong mga pamamaraan ay aking mga pamamaraan, sabi ng Panginoon. Sapagkat kung paanong ang langit ay mas mataas kaysa lupa, gayon ang aking mga pamamaraan ay mas mataas kaysa inyong mga pamamaraan at ang aking mga pag-iisip kaysa inyong mga pag-iisip.'",
+                    // THIRD 20-----------------------------------------------------------------------------------------------------------------
+                            "Santiago 1:12 -'Mapalad ang taong nananatiling matatag sa kabila ng pagsubok sapagkat matapos siyang subukin, tatanggap siya ng putong ng buhay na ipinangako ng Panginoon sa mga umiibig sa kanya.'",
+                            "Kawikaan 3:11-12 -'Anak ko, huwag mong hamakin ang disiplina ng Panginoon, at huwag kang mawalan ng loob kapag ikaw ay kanyang kinagalitan. Sapagkat ang minamahal ng Panginoon ay kanyang dinidisiplina, gaya ng ama sa anak na kanyang kinalulugdan.'",
+                            "Hebreo 12:1-2 -'Kaya't yamang napapaligiran tayo ng napakaraming saksi, itabi natin ang bawat pabigat at ang kasalanang madaling bumalot sa atin, at patakbuhin natin nang may pagtitiis ang takbuhin na inilagay sa harapan natin. Ituon natin ang ating mga mata kay Jesus, ang tagapagsimula at tagatapos ng ating pananampalataya.'",
+                            "Efeso 6:10-11 -'Sa wakas, magpakatatag kayo sa Panginoon at sa kanyang kapangyarihan. Isuot ninyo ang buong baluti ng Diyos upang kayo'y makatayo laban sa mga pakana ng diyablo.'",
+                            "1 Corinto 15:58 -'Kaya, mga minamahal kong kapatid, maging matatag kayo, hindi natitinag, laging masigasig sa gawain ng Panginoon, yamang nalalaman ninyo na hindi nawawalan ng kabuluhan ang inyong gawa sa Panginoon.'",
+                            "Awit 100:4 -'Pumasok kayo sa kanyang mga pintuan na may pasasalamat, at sa kanyang mga looban na may pagpupuri. Magpasalamat kayo sa kanya, purihin ninyo ang kanyang pangalan.'",
+                            "Awit 46:10 -'Manahimik kayo, at alamin ninyo na ako ang Diyos; ako'y pupurihin sa gitna ng mga bansa, ako'y pupurihin sa lupa.'",
+                            "Kawikaan 4:23 -'Sa lahat ng bagay na dapat ingatan, higit sa lahat ingatan mo ang iyong puso sapagkat dito nagmumula ang bukal ng buhay.'",
+                            "Efeso 4:29 -'Huwag kayong gumamit ng masasamang salita, kundi yung makakapagpatibay at makakabuti sa nakikinig ayon sa kanilang pangangailangan.'",
+                            "Santiago 1:19 -'Mga minamahal kong kapatid, tandaan ninyo ito: ang bawat tao ay maging mabilis sa pakikinig, matiyaga sa pagsasalita, hindi magagalitin.'",
+                            "Awit 1:1-2 -'Mapalad ang tao na hindi lumalakad sa payo ng masama, ni tumatayo sa daan ng mga makasalanan, ni nauupo sa upuan ng mga manglilibak. Kundi ang kanyang kagalakan ay nasa kautusan ng Panginoon, at sa kanyang kautusan siya'y nagbubulay-bulay araw at gabi.'",
+                            "Kawikaan 16:3 -'Ipagkatiwala mo sa Panginoon ang iyong mga gawain, at ang iyong mga plano ay magtatagumpay.'",
+                            "Awit 37:5 -'Ihagis mo sa Panginoon ang iyong kabigatan, at siya ang magpapaganap.'",
+                            "1 Tesalonica 4:16-17 -'Sapagkat ang Panginoon mismo ang bababa mula sa langit na may malakas na utos, kasama ng tinig ng arkanghel at ng tunog ng trumpeta ng Diyos. At ang mga namatay kay Cristo ay babangon muna. Pagkatapos, tayong nabubuhay at natitira ay aagawin kasama nila sa mga ulap upang salubungin ang Panginoon sa papawirin. Kaya't magpakailanman ay makakapiling natin ang Panginoon.'",
+                            "Hebreo 13:8 -'Si Jesucristo ay siya rin kahapon, ngayon, at magpakailanman.'",
+                            "2 Timoteo 3:16 -'Ang lahat ng kasulatan ay kinasihan ng Diyos at magagamit sa pagtuturo, sa pagsaway, sa pagtutuwid, at sa pagsasanay sa katuwiran.'",
+                            "Awit 119:11 -'Ang iyong salita ay aking itinago sa aking puso upang hindi ako magkasala laban sa iyo.'",
+                            "Kawikaan 22:6 -'Turuan mo ang bata sa daan na dapat niyang lakaran, at pagka tumanda man siya ay hindi niya ito lilisanin.'",
+                            "Juan 8:32 -'At makikilala ninyo ang katotohanan, at ang katotohanan ang magpapalaya sa inyo.'",
+                            "Awit 73:26 -'Ang aking laman at aking puso ay nanghihina, ngunit ang Diyos ang aking kalakasan at bahagi ko magpakailanman.'",
+                    // FOURTH 20-----------------------------------------------------------------------------------------------------------------
+                            "Isaias 53:5 -'Ngunit siya ay nasugatan dahil sa ating mga pagsuway, siya ay binugbog dahil sa ating mga kasamaan. Ang parusa na nagbigay sa atin ng kapayapaan ay nasa kanya, at sa pamamagitan ng kanyang mga latay ay gumaling tayo.'",
+                            "1 Corinto 13:13 -'Ngayon, nananatili ang tatlong ito: ang pananampalataya, ang pag-asa, at ang pag-ibig. Ngunit ang pinakadakila sa mga ito ay ang pag-ibig.'",
+                            "Efeso 3:20 -'Sa kanya na makakagawa ng higit pa sa lahat ng ating hinihingi o iniisip, ayon sa kanyang kapangyarihan na kumikilos sa atin.'",
+                            "Roma 8:38-39 -'Sapagkat ako'y naniniwalang walang makakapaghiwalay sa atin sa pag-ibig ng Diyos na kay Cristo Jesus na ating Panginoon, maging kamatayan man o buhay, mga anghel man o pamunuan, mga bagay na kasalukuyan o mga bagay na darating, mga kapangyarihan man, kataasan o kalaliman, o anumang nilalang na bagay.'",
+                            "Awit 34:8 -'Tikman ninyo at tingnan kung gaano kabuti ang Panginoon; mapalad ang taong kanlungan ay siya.'",
+                            "Isaias 43:2 -'Kapag dumaan ka sa tubig, ako'y sasaiyo; at sa mga ilog, hindi ka matatangay ng agos. Kapag dumaan ka sa apoy, hindi ka masusunog, at ang apoy ay hindi ka tutupukin.'",
+                            "Mateo 6:34 -'Kaya huwag kayong mabalisa tungkol sa bukas, sapagkat ang bukas ay may sariling mga alalahanin. Sapat na ang bawat araw sa kanyang sariling problema.'",
+                            "Roma 12:21 -'Huwag kang padaig sa masama, kundi daigin mo ng mabuti ang masama.'",
+                            "1 Corinto 3:16 -'Hindi ba ninyo alam na kayo'y templo ng Diyos at ang Espiritu ng Diyos ay nananahan sa inyo?'",
+                            "Filipos 1:6 -'Natitiyak ko ito, na ang nagsimula ng mabuting gawa sa inyo ay siya ring magtatapos nito hanggang sa araw ni Cristo Jesus.'",
+                            "Mateo 5:14 -'Kayo ang ilaw ng sanlibutan. Ang isang lungsod na nakatayo sa ibabaw ng isang burol ay hindi maitatago.'",
+                            "Awit 37:7 -'Magpakalasa ka sa Panginoon at hintayin mo siya nang may pagtitiis; huwag kang mag-alala sa mga nagsisikap na magtagumpay sa kanilang masasamang plano.'",
+                            "1 Pedro 3:15 -'Kundi itaguyod ninyo sa inyong puso si Cristo bilang Panginoon. Lagi kayong maging handa na ipaliwanag sa sinumang humihingi ng katuwiran ng pag-asang nasa inyo, ngunit gawin ninyo ito nang may kaamuan at paggalang.'",
+                            "Juan 13:34-35 -'Isang bagong utos ang ibinibigay ko sa inyo: magmahalan kayo. Kung paanong minahal ko kayo, magmahalan din kayo. Sa ganito makikilala ng lahat na kayo'y aking mga alagad, kung kayo'y may pagmamahal sa isa't isa.'",
+                            "Awit 119:105 -'Ang iyong salita ay ilawan sa aking mga paa at liwanag sa aking landas.'",
+                            "2 Corinto 4:16-18 -'Kaya't hindi kami pinanghihinaan ng loob. Bagama't ang aming panlabas na katawan ay unti-unting humihina, ang aming panloob na pagkatao ay araw-araw na pinapabago. Sapagkat ang aming magaang kapighatian, na panandalian lamang, ay nagdudulot sa amin ng walang hanggang kaluwalhatiang walang hanggan. Kaya't hindi namin pinapansin ang mga bagay na nakikita, kundi ang mga bagay na hindi nakikita. Sapagkat ang mga bagay na nakikita ay panandalian lamang, ngunit ang mga bagay na hindi nakikita ay walang hanggan.'",
+                            "Kawikaan 18:10 -'Ang pangalan ng Panginoon ay matibay na tore; ang matuwid ay tatakbo sa kanya at magiging ligtas.'",
+                            "Awit 27:1 -'Ang Panginoon ang aking liwanag at aking kaligtasan; kanino ako matatakot? Ang Panginoon ang muog ng aking buhay; kanino ako masisindak?'",
+                            "Isaias 40:29 -'Binibigyan niya ng lakas ang mga napapagod at pinapalakas ang walang kapangyarihan.'",
+                            "Awit 62:1-2 -'Sa Diyos lamang ako'y tahimik na naghihintay; mula sa kanya ang aking kaligtasan. Siya lamang ang aking bato at aking kaligtasan, aking kuta; hindi ako makikilos.'",
+
+                            
+
+
+
+
+
+
+                          
+
+                    ]
+
+                    function generateQuote() {
+                              const displayQuote = document.getElementById('display-quote');
+                              const randomGenerator = Math.floor(Math.random() * quotes.length);
+                              displayQuote.textContent = quotes[randomGenerator]
+                    }
+
+          </script>
+</body>
+</html>
