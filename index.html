@@ -7,38 +7,31 @@
           <link rel="icon" href="https://github.com/Janjancel/icon/blob/main/T10.LOGO.png?raw=true" type="image/x-icon">
           <style>
                     body {
-                              background-image: url(https://github.com/Janjancel/icon/blob/main/treee.jpg?raw=true);
-                              background-position-x: center;
-                              background-repeat: no-repeat;
+                              background-color: #020617;
                               padding-top: 30vh;
                               justify-content: center;
                               text-align: center;
-                              display: flex;
-                             
+                    }
+
+                    section {
+                        display: flex;
+                        justify-content: center;
                     }
                     .container {
                                 font-family: monospace;
-                                 /* background-color: #15803d; */
+                                background-color: #0f172a;
+                                color: #334155;
                                 padding: 20px;
                                 width: 400px;
                                 border-radius: 10px;
                                 border: solid 0.5px;
-                       
+                                box-shadow: 0 5px 10px #1e293b;
                     }
-
-                    .container h1 {
-                        color: #052e16;
-                                text-shadow: -1px 1px 0 khaki,
-                                1px 1px 0 khaki,
-                                1px -1px 0 khaki,
-                                -1px -1px 0 khaki;
-                    }
-
 
                     #display-quote {
                               
-                              background-color: #052e16;
-                              color: rgb(210, 232, 112);
+                              background-color: #1e293b;
+                              color: #94a3b8;
                               font-size: large;
                               /* border:solid 1px; */
                               border-radius: 10px;
@@ -50,11 +43,21 @@
                               border-radius: 10px;
                               height: 40px;
                               font-weight: 500;
+                              background-color: #020617;
+                              color: #94a3b8;
                     }
 
                     button:hover {
-                              background-color: #052e16;
-                              color: khaki;
+                              background-color: #64748b;
+                              color: #0f172a;
+                              font-weight: 500;
+                              font-size: medium;
+                    }
+
+                    footer {
+                        font-family: monospace;
+                        display: block;
+                        color: #1e293b;
                     }
 
                     /* # Mobile */
@@ -63,15 +66,23 @@
                                 padding-top: 20vh;
                         }
                 }
+
+                
         
           </style>
 </head>
 <body>  
+        <section>
           <div class="container">
                     <h1>BIBLE VERSE GENERATOR</h1>
                     <p id="display-quote"></p>
                     <button onclick="generateQuote()">Generate Verse</button>
           </div>
+        </section>
+          <footer>
+                <h6>created by: Jancel C. Peralta</h6>
+                2024
+          </footer>
 
           <script>
                     const quotes = [
